@@ -5,7 +5,6 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
     if (playerSelection == "rock") {
         if (computerSelection == "rock") {
             return "TIE!";
@@ -39,5 +38,42 @@ function playRound(playerSelection, computerSelection) {
             return "TIE!";
         }
     }
-    return "The entered move is not valid! Choose between: rock, paper, scissors";
+}
+
+//TODO: break this big "game" function into smaller functions (single responsibility)
+//TODO: add input validation
+//TODO: declare often used strings as global constants
+function game() {
+    const numRounds = 5;
+    let playerWins = 0;
+    let computerWins = 0;
+    console.log(`The score is: ${playerWins} - ${computerWins} (player - computer)`);
+    for (let round = 1; round <= numRounds; round++) {
+        console.log(`Round ${round}:`);
+        let playerSelection = prompt("Choose between: rock, paper, scissors");
+        let computerSelection = getComputerChoice();
+        console.log("The computer chose: " + computerSelection);
+        let roundResult = playRound(playerSelection, computerSelection);
+        console.log(roundResult);
+        if (roundResult.includes("WIN")) {
+            playerWins++;
+        }
+        else if(roundResult.includes("LOSE")) {
+            computerWins++;
+        }
+        else {
+            playerWins++;
+            computerWins++;
+        }
+        console.log(`The score is: ${playerWins} - ${computerWins} (player - computer)`);
+    }
+    if (playerWins == computerWins) {
+        console.log("The game finished in a TIE.");
+    }
+    else if (playerWins < computerWins) {
+        console.log("YOU LOST the game.");
+    }
+    else {
+        console.log("YOU WON the game!");
+    }
 }
