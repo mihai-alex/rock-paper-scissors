@@ -10,7 +10,8 @@ function validatePlayerChoice(playerSelection) {
     }
     playerSelection = playerSelection.toLowerCase();
     playerSelection = playerSelection.trim();
-    if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
+    if (playerSelection === "rock" || playerSelection === "paper" ||
+        playerSelection === "scissors") {
         return playerSelection;
     }
     return undefined;
@@ -54,22 +55,24 @@ function playRound(playerSelection, computerSelection) {
 
 function play() {
     const numRounds = 5;
-    let playerWins = 0;
-    let computerWins = 0;
+    let numPlayerWins = 0;
+    let numComputerWins = 0;
     console.log("Rock, paper, scissors, GO!!!")
     for (let round = 1; round <= numRounds; round++) {
         console.log(`Round ${round}:`);
-        console.log(`The score is: ${playerWins} - ${computerWins} (player - computer)`);
+        console.log(`The score is: ${numPlayerWins} - ${numComputerWins} ` +
+            `(player - computer)`);
 
         let playerSelection = prompt("Choose between: rock, paper, scissors");
         playerSelection = validatePlayerChoice(playerSelection);
         if (playerSelection === undefined) {
-            console.log("The entered choice is not valid! Choose between: rock, paper, scissors");
+            console.log("The entered choice is not valid! Choose between: " +
+                "rock, paper, scissors");
             round--;
             continue;
         }
         if (playerSelection === null) {
-            console.log("You have exited the game. Call play(); to play again!");
+            console.log("You have exited the game. Call play(); to go again!");
             return;
         }
 
@@ -78,21 +81,22 @@ function play() {
         let roundResult = playRound(playerSelection, computerSelection);
         console.log(roundResult);
         if (roundResult.includes("WIN")) {
-            playerWins++;
+            numPlayerWins++;
         }
         else if (roundResult.includes("LOSE")) {
-            computerWins++;
+            numComputerWins++;
         }
         else {
-            playerWins++;
-            computerWins++;
+            numPlayerWins++;
+            numComputerWins++;
         }
     }
-    console.log(`The score is: ${playerWins} - ${computerWins} (player - computer)`);
-    if (playerWins == computerWins) {
+    console.log(`The score is: ${numPlayerWins} - ${numComputerWins} ` +
+        `(player - computer)`);
+    if (numPlayerWins == numComputerWins) {
         console.log("The game finished in a TIE.");
     }
-    else if (playerWins < computerWins) {
+    else if (numPlayerWins < numComputerWins) {
         console.log("YOU LOST the game.");
     }
     else {
