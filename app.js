@@ -52,7 +52,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
+function play() {
     const numRounds = 5;
     let playerWins = 0;
     let computerWins = 0;
@@ -60,6 +60,7 @@ function game() {
     for (let round = 1; round <= numRounds; round++) {
         console.log(`Round ${round}:`);
         console.log(`The score is: ${playerWins} - ${computerWins} (player - computer)`);
+
         let playerSelection = prompt("Choose between: rock, paper, scissors");
         playerSelection = validatePlayerChoice(playerSelection);
         if (playerSelection === undefined) {
@@ -68,10 +69,9 @@ function game() {
             continue;
         }
         if (playerSelection === null) {
-            console.log("You have exited the game. Refresh the page to play again!");
+            console.log("You have exited the game. Call play(); to play again!");
             return;
         }
-        
 
         let computerSelection = getComputerChoice();
         console.log("The computer chose: " + computerSelection);
@@ -100,4 +100,4 @@ function game() {
     }
 }
 
-game();
+console.log("Call play(); to start playing!")
