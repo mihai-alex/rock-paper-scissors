@@ -12,7 +12,9 @@
 </head>
 
 <body>
-    <h1><a>ROCK-PAPER-SCISSORS</a></h1>
+    <h1>
+        <span>ROCK-PAPER-SCISSORS</span>
+    </h1>
 
     <div class="choice-buttons-all">
         <button class="choice-button" id="rock">Rock</button>
@@ -20,8 +22,21 @@
         <button class="choice-button" id="scissors">Scissors</button>
     </div>
 
-    <div class="round-result">
-        <p class="result-text"></p>
+    <div class="round-status">
+        <div class="contestants">
+            <div class="player-result">
+                <span id="player-text">Player Score:</span>
+                <span id="player-score"></span>
+            </div>
+            <div class="computer-result">
+                <span id="computer-text">Computer Score:</span>
+                <span id="computer-score"></span>
+            </div>
+        </div>
+        <div class="round-result">
+            <span id="computer-choice"></span>
+            <span id="status"></span>
+        </div>
     </div>
 </body>
 

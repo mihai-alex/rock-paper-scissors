@@ -1,3 +1,45 @@
+let playerScore = 0;
+let computerScore = 0;
+
+function updateScore() {
+    const playerStatus = document.getElementById('player-score');
+    playerStatus.textContent = playerScore;
+
+    const computerStatus = document.getElementById('computer-score');
+    computerStatus.textContent = computerScore;
+}
+
+function updateComputerChoice(choice) {
+    const computerStatus = document.getElementById('computer-choice');
+    computerStatus.textContent = choice;
+}
+
+function updateStatus(status) {
+    const gameStatus = document.getElementById('status');
+    gameStatus.textContent = status;
+}
+
+function updateRoundResultColor(result) {
+    const roundResult = document.querySelector(".round-result");
+    switch (result) {
+        case 1:
+            roundResult.style.cssText = 'border: .4rem solid green; \
+                                        box-shadow: 0 0 1rem green;';
+            break;
+        case -1:
+            roundResult.style.cssText = 'border: .4rem solid red; \
+                                        box-shadow: 0 0 1rem red;';
+            break;
+        case 0:
+            roundResult.style.cssText = 'border: .4rem solid yellow; \
+                                        box-shadow: 0 0 1rem yellow;';
+            break;
+        default:
+            roundResult.style.cssText = 'border: .4rem solid gray; \
+            box-shadow: 0 0 1rem gray;';
+    }
+}
+
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     let randomChoice = Math.floor(Math.random() * 3);
@@ -11,6 +53,7 @@ function getComputerChoice() {
          1, player wins
 */
 function playRound(playerSelection, computerSelection) {
+    const roundResult = document.querySelector(".round-result");
     if (playerSelection === "rock") {
         if (computerSelection === "rock") {
             return 0;
@@ -52,24 +95,27 @@ function addChoiceButtonsEvents() {
         const playerSelection = button.id;
         const computerSelection = getComputerChoice();
         const roundResult = playRound(playerSelection, computerSelection);
-        console.log("The computer chose: " + computerSelection);
+        updateComputerChoice(`The computer chose: ${computerSelection}!`);
+        updateRoundResultColor(roundResult);
         switch (roundResult) {
             case -1:
-                console.log(`You LOSE! ${computerSelection} beats ${playerSelection}!`);
+                computerScore++;
+                updateScore();
+                updateStatus(`You LOSE! ${computerSelection} beats ${playerSelection}!`);
                 break;
             case 0:
-                console.log(`TIE!`)
+                updateStatus(`TIE!`)
                 break;
             case 1:
-                console.log(`You WIN! ${playerSelection} beats ${computerSelection}!`);
+                playerScore++;
+                updateScore();
+                updateStatus(`You WIN! ${playerSelection} beats ${computerSelection}!`);
                 break;
         }
     }));
 }
 
 function play() {
-    addChoiceButtonsEvents();
-
     // const numRounds = 5;
     // let numPlayerWins = 0;
     // let numComputerWins = 0;
@@ -101,6 +147,13 @@ function play() {
     // else {
     //     console.log("YOU WON the game!");
     // }
+
+    playerScore = 0;
+    computerScore = 0;
+    updateScore(undefined);
+    updateComputerChoice("The computer is");
+    updateStatus("waiting for your move...");
+    addChoiceButtonsEvents();
 }
 
 play();
