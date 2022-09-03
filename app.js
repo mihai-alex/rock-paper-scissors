@@ -21,12 +21,18 @@ function updateStatus(status) {
 
 function updateRoundResultColor(result) {
     const roundResult = document.querySelector(".round-result");
+    const playerSpan = document.getElementById('player-score');
+    const computerSpan = document.getElementById('computer-score');
+    computerSpan.style.cssText = "transform: scale(1);";
+    playerSpan.style.cssText = "transform: scale(1);";
     switch (result) {
         case 1:
+            playerSpan.style.cssText = "transform: scale(1.5);";
             roundResult.style.cssText = 'border: .4rem solid green; \
                                         box-shadow: 0 0 1rem green;';
             break;
         case -1:
+            computerSpan.style.cssText = "transform: scale(1.5);";
             roundResult.style.cssText = 'border: .4rem solid red; \
                                         box-shadow: 0 0 1rem red;';
             break;
@@ -116,38 +122,6 @@ function addChoiceButtonsEvents() {
 }
 
 function play() {
-    // const numRounds = 5;
-    // let numPlayerWins = 0;
-    // let numComputerWins = 0;
-    // console.log("Rock, paper, scissors, GO!!!")
-    // for (let round = 1; round <= numRounds; round++) {
-    //     console.log(`Round ${round}:`);
-    //     console.log(`The score is: ${numPlayerWins} - ${numComputerWins} ` +
-    //         `(player - computer)`);
-
-    //     if (roundResult.includes("WIN")) {
-    //         numPlayerWins++;
-    //     }
-    //     else if (roundResult.includes("LOSE")) {
-    //         numComputerWins++;
-    //     }
-    //     else {
-    //         numPlayerWins++;
-    //         numComputerWins++;
-    //     }
-    // }
-    // console.log(`The score is: ${numPlayerWins} - ${numComputerWins} ` +
-    //     `(player - computer)`);
-    // if (numPlayerWins == numComputerWins) {
-    //     console.log("The game finished in a TIE.");
-    // }
-    // else if (numPlayerWins < numComputerWins) {
-    //     console.log("YOU LOST the game.");
-    // }
-    // else {
-    //     console.log("YOU WON the game!");
-    // }
-
     playerScore = 0;
     computerScore = 0;
     updateScore(undefined);
