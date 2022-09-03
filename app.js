@@ -124,6 +124,7 @@ function addChoiceButtonsEvents() {
 function play() {
     playerScore = 0;
     computerScore = 0;
+    updateRoundResultColor(undefined);
     updateScore(undefined);
     updateComputerChoice("The computer is");
     updateStatus("waiting for your move...");

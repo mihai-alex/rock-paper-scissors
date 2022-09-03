@@ -20,7 +20,7 @@ h1 {
     background: linear-gradient(to right, black, whitesmoke, black);
 }
 
-h1 span {
+h1 #title {
     display: flex;
     white-space: nowrap;
     overflow: hidden;
@@ -29,6 +29,13 @@ h1 span {
     text-decoration: none;
     letter-spacing: 12px;
     color: whitesmoke;
+}
+
+#subtitle {
+    margin-top: -24px;
+    margin-bottom: 12px;
+    color: whitesmoke;
+    opacity: 0.15;
 }
 
 .choice-button {
