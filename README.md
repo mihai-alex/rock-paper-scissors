@@ -1,2 +1,2 @@
 # rock-paper-scissors
-## Basic rock paper scissors game, played in the console.
+## Infinite rock paper scissors game, built using the basics of HTML, CSS and JavaScript.
