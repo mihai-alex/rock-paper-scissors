@@ -3,11 +3,11 @@ let computerScore = 0;
 let numberOfWinningRounds = 5;
 
 function updateScore() {
-    const playerStatus = document.getElementById('player-score');
-    playerStatus.textContent = playerScore;
-
-    const computerStatus = document.getElementById('computer-score');
-    computerStatus.textContent = computerScore;
+    document.getElementById('player-score').textContent = playerScore;
+    document.getElementById('computer-score').textContent = computerScore;
+    if (playerScore >= numberOfWinningRounds || computerScore >= numberOfWinningRounds) {
+        endGame();
+    }
 }
 
 function updateComputerChoice(choice) {
@@ -60,7 +60,6 @@ function getComputerChoice() {
          1, player wins
 */
 function playRound(playerSelection, computerSelection) {
-    const roundResult = document.querySelector(".round-result");
     if (playerSelection === "rock") {
         if (computerSelection === "rock") {
             return 0;
@@ -105,22 +104,16 @@ function choiceButtonsEventListenerFunction(e) {
     switch (roundResult) {
         case -1:
             computerScore++;
-            updateScore();
             updateStatus(`You LOSE! ${computerSelection} beats ${playerSelection}!`);
-            if (computerScore >= numberOfWinningRounds) {
-                endGame();
-            }
+            updateScore();
             break;
         case 0:
             updateStatus(`TIE!`)
             break;
         case 1:
             playerScore++;
-            updateScore();
             updateStatus(`You WIN! ${playerSelection} beats ${computerSelection}!`);
-            if (playerScore >= numberOfWinningRounds) {
-                endGame();
-            }
+            updateScore();
             break;
     }
 }
@@ -136,8 +129,7 @@ function removeChoiceButtonsEvents() {
 }
 
 function updateSubtitle(text) {
-    subtitle = document.getElementById("subtitle");
-    subtitle.textContent = text;
+    subtitle = document.getElementById("subtitle").textContent = text;
 }
 
 function play() {
@@ -155,17 +147,20 @@ function play() {
 function endGame() {
     removeChoiceButtonsEvents();
     if (playerScore > computerScore) {
-        updateComputerChoice("Game over! You WON!");
-        updateStatus( "REFRESH the page to play AGAIN!");
+        updateSubtitle("Game over! You WON!");
+        subtitle = document.getElementById("subtitle").style.color = "green";
     }
     else if (computerScore > playerScore) {
-        updateComputerChoice("Game over! You LOST!");
-        updateStatus( "REFRESH the page to play AGAIN!");
+        updateSubtitle("Game over! You LOST!");
+        subtitle = document.getElementById("subtitle").style.color = "red";
     }
     else {
-        updateComputerChoice("Game over! It's a TIE!");
-        updateStatus( "REFRESH the page to play AGAIN!");
+        updateSubtitle("Game over! It's a TIE!");
+        subtitle = document.getElementById("subtitle").style.color = "gold";
     }
+    const title = document.getElementById("title");
+    title.textContent = "REFRESH TO PLAY AGAIN!";
+    title.style.color ="goldenrod";
 }
 
 play();
