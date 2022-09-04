@@ -36,6 +36,8 @@ function updateRoundResultColor(result) {
                                         box-shadow: 0 0 1rem red;';
             break;
         case 0:
+            playerSpan.style.cssText = "transform: scale(1.5);";
+            computerSpan.style.cssText = "transform: scale(1.5);";
             roundResult.style.cssText = 'border: .4rem solid yellow; \
                                         box-shadow: 0 0 1rem yellow;';
             break;
@@ -106,7 +108,10 @@ function choiceButtonsEventListenerFunction(e) {
             updateScore();
             break;
         case 0:
+            playerScore++;
+            computerScore++;
             updateStatus(`TIE!`)
+            updateScore();
             break;
         case 1:
             playerScore++;
