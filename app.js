@@ -160,7 +160,7 @@ function endGame() {
     const title = document.getElementById("title");
     title.textContent = "CLICK HERE TO PLAY AGAIN!";
     title.style.color = "goldenrod";
-    title.href = ".";
+    title.href = "javascript:window.location.href=window.location.href";
 }
 
 play();
