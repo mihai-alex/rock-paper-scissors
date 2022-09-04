@@ -34,8 +34,8 @@ h1 #title {
 #subtitle {
     margin-top: -24px;
     margin-bottom: 12px;
-    color: whitesmoke;
-    opacity: 0.15;
+    color: goldenrod;
+    font-size: 20px;
 }
 
 .choice-button {

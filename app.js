@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+let numberOfWinningRounds = 5;
 
 function updateScore() {
     const playerStatus = document.getElementById('player-score');
@@ -95,40 +96,76 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function choiceButtonsEventListenerFunction(e) {
+    const playerSelection = e.target.id;
+    const computerSelection = getComputerChoice();
+    const roundResult = playRound(playerSelection, computerSelection);
+    updateComputerChoice(`The computer chose: ${computerSelection}!`);
+    updateRoundResultColor(roundResult);
+    switch (roundResult) {
+        case -1:
+            computerScore++;
+            updateScore();
+            updateStatus(`You LOSE! ${computerSelection} beats ${playerSelection}!`);
+            if (computerScore >= numberOfWinningRounds) {
+                endGame();
+            }
+            break;
+        case 0:
+            updateStatus(`TIE!`)
+            break;
+        case 1:
+            playerScore++;
+            updateScore();
+            updateStatus(`You WIN! ${playerSelection} beats ${computerSelection}!`);
+            if (playerScore >= numberOfWinningRounds) {
+                endGame();
+            }
+            break;
+    }
+}
+
 function addChoiceButtonsEvents() {
     const choiceButtons = Array.from(document.getElementsByClassName("choice-button"));
-    choiceButtons.forEach(button => button.addEventListener('click', () => {
-        const playerSelection = button.id;
-        const computerSelection = getComputerChoice();
-        const roundResult = playRound(playerSelection, computerSelection);
-        updateComputerChoice(`The computer chose: ${computerSelection}!`);
-        updateRoundResultColor(roundResult);
-        switch (roundResult) {
-            case -1:
-                computerScore++;
-                updateScore();
-                updateStatus(`You LOSE! ${computerSelection} beats ${playerSelection}!`);
-                break;
-            case 0:
-                updateStatus(`TIE!`)
-                break;
-            case 1:
-                playerScore++;
-                updateScore();
-                updateStatus(`You WIN! ${playerSelection} beats ${computerSelection}!`);
-                break;
-        }
-    }));
+    choiceButtons.forEach(button => button.addEventListener('click', choiceButtonsEventListenerFunction));
+}
+
+function removeChoiceButtonsEvents() {
+    const choiceButtons = Array.from(document.getElementsByClassName("choice-button"));
+    choiceButtons.forEach(button => button.removeEventListener('click', choiceButtonsEventListenerFunction));
+}
+
+function updateSubtitle(text) {
+    subtitle = document.getElementById("subtitle");
+    subtitle.textContent = text;
 }
 
 function play() {
     playerScore = 0;
     computerScore = 0;
+    numberOfWinningRounds = 5;
+    updateSubtitle(`First to win ${numberOfWinningRounds} rounds, wins the game!`);
     updateRoundResultColor(undefined);
     updateScore(undefined);
     updateComputerChoice("The computer is");
     updateStatus("waiting for your move...");
     addChoiceButtonsEvents();
+}
+
+function endGame() {
+    removeChoiceButtonsEvents();
+    if (playerScore > computerScore) {
+        updateComputerChoice("Game over! You WON!");
+        updateStatus( "REFRESH the page to play AGAIN!");
+    }
+    else if (computerScore > playerScore) {
+        updateComputerChoice("Game over! You LOST!");
+        updateStatus( "REFRESH the page to play AGAIN!");
+    }
+    else {
+        updateComputerChoice("Game over! It's a TIE!");
+        updateStatus( "REFRESH the page to play AGAIN!");
+    }
 }
 
 play();
