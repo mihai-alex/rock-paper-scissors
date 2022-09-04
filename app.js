@@ -11,13 +11,11 @@ function updateScore() {
 }
 
 function updateComputerChoice(choice) {
-    const computerStatus = document.getElementById('computer-choice');
-    computerStatus.textContent = choice;
+    document.getElementById('computer-choice').textContent = choice;;
 }
 
 function updateStatus(status) {
-    const gameStatus = document.getElementById('status');
-    gameStatus.textContent = status;
+    document.getElementById('status').textContent = status;
 }
 
 function updateRoundResultColor(result) {
@@ -158,9 +156,11 @@ function endGame() {
         updateSubtitle("Game over! It's a TIE!");
         subtitle = document.getElementById("subtitle").style.color = "gold";
     }
+    // refresh button
     const title = document.getElementById("title");
-    title.textContent = "REFRESH TO PLAY AGAIN!";
-    title.style.color ="goldenrod";
+    title.textContent = "CLICK HERE TO PLAY AGAIN!";
+    title.style.color = "goldenrod";
+    title.href = ".";
 }
 
 play();
